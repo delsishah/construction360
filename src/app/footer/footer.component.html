@@ -1,0 +1,24 @@
+<footer class="bg-dark text-white p-4 mt-5">
+    <div class="container d-flex justify-content-between">
+        <div>
+            <h5>ConstructManage</h5>
+            <p>Your trusted partner in construction management.</p>
+        </div>
+        <div>
+            <h6>Navigation</h6>
+            <ul class="list-unstyled">
+                <ng-container *ngIf="!authService.authUser">
+                    <li><a href="#" class="text-white text-decoration-none">Login</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Sign Up</a></li>
+                </ng-container>
+                <li><a href="#" class="text-white text-decoration-none">Home Overview</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Construction Site</a></li>
+            </ul>
+        </div>
+        <div>
+            <h6>Contact Us</h6>
+            <p>Email: <a href="#" class="text-white text-decoration-none">support&#64;constructmanage.com</a></p>
+            <p>Phone: +1 234 567 890</p>
+        </div>
+    </div>
+</footer>

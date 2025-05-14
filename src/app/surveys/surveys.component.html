@@ -1,0 +1,152 @@
+<div class="flex-grow-1 p-4" style="background-color: #f8f9fa">
+  <div class="container">
+    <h2 class="fw-bold mb-4">Project Surveys & Reviews</h2>
+    
+    <!-- Filter Section -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <div class="d-flex flex-wrap align-items-center gap-2">
+              <select class="form-select" style="width: auto;" [(ngModel)]="selectedTeam" (change)="applyFilters()">
+                <option *ngFor="let team of teams" [value]="team">{{ team === 'All' ? 'All Teams' : team }}</option>
+              </select>
+              
+              <div class="btn-group me-2">
+                <button class="btn" [class.btn-primary]="selectedType === 'All'" 
+                        [class.btn-outline-primary]="selectedType !== 'All'"
+                        (click)="setTypeFilter('All')">All</button>
+                <button class="btn" [class.btn-primary]="selectedType === 'Public'" 
+                        [class.btn-outline-primary]="selectedType !== 'Public'"
+                        (click)="setTypeFilter('Public')">Public</button>
+                <button class="btn" [class.btn-primary]="selectedType === 'Reviews'" 
+                        [class.btn-outline-primary]="selectedType !== 'Reviews'"
+                        (click)="setTypeFilter('Reviews')">Reviews</button>
+                <button class="btn" [class.btn-primary]="selectedType === 'Internal'" 
+                        [class.btn-outline-primary]="selectedType !== 'Internal'"
+                        (click)="setTypeFilter('Internal')">Internal</button>
+              </div>
+              
+              <button class="btn btn-outline-secondary" (click)="resetFilters()">
+                <i class="fas fa-sync-alt"></i> Reset
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 text-end">
+            <button class="btn btn-success" (click)="openNewSurveyModal()">
+              <i class="fas fa-plus"></i> New Survey
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Results Counter -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p class="mb-0">Showing {{ filteredSurveys.length }} of {{ allSurveys.length }} surveys</p>
+      <div class="dropdown" (click)="$event.stopPropagation()" #sortDropdown>
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" (click)="isDropdownOpen = !isDropdownOpen">
+          Sort by: {{ currentSortLabel }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" [class.show]="isDropdownOpen">
+          <li *ngFor="let option of sortOptions">
+            <a class="dropdown-item" href="javascript:void(0)" (click)="setSortOption(option.id); isDropdownOpen = false">
+              {{ option.label }}
+              <i *ngIf="currentSortOption === option.id" class="fas fa-check ms-2"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Survey Cards -->
+    <div class="row">
+      <div class="col-md-6 mb-3" *ngFor="let survey of filteredSurveys">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title mb-0">{{ survey.title }}</h5>
+              <span class="badge" [ngClass]="{
+                'bg-info': survey.type === 'Public',
+                'bg-warning text-dark': survey.type === 'Reviews',
+                'bg-secondary': survey.type === 'Internal'
+              }">{{ survey.type }}</span>
+            </div>
+            <p class="card-text text-muted mb-1">with {{ survey.with }}</p>
+            <p class="card-text small mb-3">
+              <i class="fas fa-calendar-alt me-1"></i> {{ survey.date }}
+              <span class="ms-3 badge bg-light text-dark">{{ survey.team }}</span>
+            </p>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-outline-primary btn-sm" (click)="viewSurveyDetails(survey.id)">
+                View Details <i class="fas fa-chevron-right ms-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- No Results Message -->
+    <div class="text-center py-5" *ngIf="filteredSurveys.length === 0">
+      <i class="fas fa-search fa-3x mb-3 text-muted"></i>
+      <h4>No surveys match your filters</h4>
+      <p class="text-muted">Try changing your search criteria or <a href="javascript:void(0)" (click)="resetFilters()">reset all filters</a>.</p>
+    </div>
+  </div>
+
+  <!-- New Survey Modal -->
+  <div class="modal-backdrop" *ngIf="showNewSurveyModal" (click)="closeModal($event)"></div>
+  <div class="modal-container" *ngIf="showNewSurveyModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Survey</h5>
+          <button type="button" class="btn-close" (click)="closeModal($event)"></button>
+        </div>
+        <div class="modal-body">
+          <form #surveyForm="ngForm">
+            <div class="mb-3">
+              <label for="surveyTitle" class="form-label">Survey Title</label>
+              <input type="text" class="form-control" id="surveyTitle" name="title" [(ngModel)]="newSurvey.title" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="surveyWith" class="form-label">Meeting With</label>
+              <input type="text" class="form-control" id="surveyWith" name="with" [(ngModel)]="newSurvey.with" required>
+            </div>
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="surveyTeam" class="form-label">Team</label>
+                <select class="form-select" id="surveyTeam" name="team" [(ngModel)]="newSurvey.team" required>
+                  <option *ngFor="let team of teams.slice(1)" [value]="team">{{ team }}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="surveyType" class="form-label">Survey Type</label>
+                <select class="form-select" id="surveyType" name="type" [(ngModel)]="newSurvey.type" required>
+                  <option *ngFor="let type of types.slice(1)" [value]="type">{{ type }}</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="surveyDate" class="form-label">Date</label>
+              <input type="date" class="form-control" id="surveyDate" name="date" [(ngModel)]="newSurvey.date" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="surveyDescription" class="form-label">Description (Optional)</label>
+              <textarea class="form-control" id="surveyDescription" name="description" [(ngModel)]="newSurvey.description" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" (click)="closeModal($event)">Cancel</button>
+          <button type="button" class="btn btn-success" [disabled]="!surveyForm.valid" (click)="createNewSurvey()">Create Survey</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

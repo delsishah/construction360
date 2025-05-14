@@ -1,0 +1,163 @@
+.progress {
+  height: 8px !important;
+  margin-bottom: 4px;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.badge {
+  padding: 0.5em 0.7em;
+  font-weight: 500;
+}
+
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: #f8f9fa;
+}
+
+.list-group-item-action:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-outline-primary, .btn-primary {
+  font-weight: 500;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.dropdown-menu {
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.dropdown-item {
+  padding: 0.4rem 1.5rem;
+}
+
+.btn-link {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop {
+  z-index: 1040;
+}
+
+.modal-dialog {
+  margin-top: 50px;
+  z-index: 1050;
+}
+
+.modal-content {
+  border-radius: 0.3rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Add these styles to the end of the file */
+.activity-timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.activity-item {
+  position: relative;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.activity-item:last-child {
+  padding-bottom: 0;
+}
+
+.activity-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  bottom: -5px;
+  width: 2px;
+  background-color: #e9ecef;
+}
+
+.activity-item:last-child::before {
+  display: none;
+}
+
+.activity-badge {
+  position: absolute;
+  left: -26px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.activity-date {
+  display: block;
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-bottom: 4px;
+}
+
+.activity-content {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 10px 15px;
+}
+
+/* Add these styles for the report filter select */
+.form-select-sm {
+  font-size: 0.875rem;
+  padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+/* Add a message for empty results */
+.list-group:empty::after {
+  content: "No results found";
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+} 

@@ -1,0 +1,72 @@
+<div class="sidebar" style="background: #f9fafb;">
+    <div class="logo">
+        <!-- <img src="assets/logo.png" alt="Logo"> -->
+        <span>Project</span>
+    </div>
+    <ul class="nav-links">
+        <li routerLinkActive="active">
+            <a routerLink="/dashboard">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/projects-reports">
+                <i class="fas fa-chart-line"></i> Projects & Reports
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/project-goals">
+                <i class="fas fa-tasks"></i> Project Goals
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/surveys">
+                <i class="fas fa-poll"></i> Surveys
+            </a>
+        </li>
+
+        <!-- Project Teams -->
+        <div class="section-title">Project Teams</div>
+        <li routerLinkActive="active">
+            <a routerLink="/marketing">
+                <i class="fas fa-users"></i> Marketing
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/design-process">
+                <i class="fas fa-drafting-compass"></i> Design Process
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/site-security">
+                <i class="fas fa-shield-alt"></i> Site Security
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="/operations">
+                <i class="fas fa-cogs"></i> Operations
+            </a>
+        </li>
+    </ul>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+        <div class="profile">
+            <img src="assets/profile.jpg" alt="User">
+            <div class="profile-info">
+                <span>Project Manager</span>
+                <a href="mailto:admin@constructproj">admin&#64;constructproj</a>
+            </div>
+        </div>
+        <div class="settings">
+            <!-- Replace the existing settings link with: -->
+            <a routerLinkActive="active" routerLink="/app-settings">
+                <i class="fas fa-cog"></i> App Settings
+            </a>
+
+            <a href="#" (click)="signOut()">
+                <i class="fas fa-sign-out-alt"></i> Sign Out
+            </a>
+        </div>
+    </div>
+</div>

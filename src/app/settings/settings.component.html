@@ -1,0 +1,96 @@
+<div class="settings-container">
+  <div class="settings-header">
+    <h2>App Settings</h2>
+    <button class="save-settings-btn" (click)="saveSettings()">Save Settings</button>
+  </div>
+  
+  <!-- Saved notification -->
+  <div class="notification" *ngIf="showSavedNotification">
+    Settings saved successfully!
+  </div>
+  
+  <div class="settings-section">
+    <h3>Profile Settings</h3>
+    <div class="setting-item">
+      <label>Display Name</label>
+      <input type="text" placeholder="Enter display name" [(ngModel)]="userSettings.displayName">
+    </div>
+    <div class="setting-item">
+      <label>Email Notifications</label>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="userSettings.emailNotifications" (change)="toggleEmailNotifications()">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-item">
+      <label>Language</label>
+      <select [(ngModel)]="userSettings.language">
+        <option *ngFor="let language of languageOptions" [value]="language">{{ language }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h3>Appearance</h3>
+    <div class="setting-item">
+      <label>Font Size</label>
+      <select [(ngModel)]="userSettings.fontSize">
+        <option *ngFor="let size of fontSizeOptions" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <label>Theme</label>
+      <select [(ngModel)]="userSettings.theme">
+        <option *ngFor="let theme of themeOptions" [value]="theme">{{ theme }}</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <label>Dark Mode</label>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="userSettings.darkMode" (change)="toggleDarkMode()">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h3>Security</h3>
+    <div class="setting-item">
+      <label>Two-Factor Authentication</label>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="userSettings.twoFactorAuth" (change)="toggleTwoFactorAuth()">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <button class="change-password-btn" (click)="openChangePasswordModal()">Change Password</button>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div class="modal-backdrop" *ngIf="showPasswordModal" (click)="closeModals()"></div>
+  <div class="modal" *ngIf="showPasswordModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Change Password</h3>
+        <button class="close-btn" (click)="closeModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" [(ngModel)]="passwordForm.currentPassword" placeholder="Enter current password">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" [(ngModel)]="passwordForm.newPassword" placeholder="Enter new password">
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password" [(ngModel)]="passwordForm.confirmPassword" placeholder="Confirm new password">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeModals()">Cancel</button>
+        <button class="btn-save" (click)="submitPasswordChange()">Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>

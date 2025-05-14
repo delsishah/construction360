@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+.login-container {
+    background: #f9fafb;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.btn-custom {
+    background-color: #00b300;
+    color: white;
+}
+.btn-custom:hover {
+    background-color: #009900;
+}
+.logo {
+    font-weight: bold;
+    color: black;
+}
+.logo-icon {
+    color: #0bc407;
+    fill: #0bc407;
+    width: 36px;
+    height: 40px;
+}

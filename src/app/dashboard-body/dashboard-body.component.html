@@ -1,0 +1,159 @@
+<div class="flex-grow-1 p-4" style="background-color: #f9fafb">
+  <div class="d-flex justify-content-end align-items-center mb-3">
+    <div>
+      <button class="btn btn-success me-2" (click)="openNewProjectModal()">New project</button>
+      <button class="btn btn-dark" (click)="goToProjects()">All projects</button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3 h-100">
+        <h5 class="fw-bold">March 2022</h5>
+        <div>
+          <span class="calendar-day active">1</span>
+          <span class="calendar-day active">2</span>
+          <span class="calendar-day active">3</span>
+          <span class="calendar-day">4</span>
+          <span class="calendar-day">5</span>
+          <span class="calendar-day">6</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3 h-100">
+        <h5 class="fw-bold">My projects (05)</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="d-flex justify-content-between align-items-center">
+            <span>✔ Complete project proposal</span>
+            <span class="text-success">In progress</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center mt-2">
+            <span>✔ Sign contract with client</span>
+            <span class="text-success">In progress</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center mt-2">
+            <span>❌ Site inspection report</span>
+            <span class="text-danger">Due</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center mt-2">
+            <span>🔄 Research new construction</span>
+            <span class="text-warning">Ongoing</span>
+          </li>
+          <li class="d-flex justify-content-between align-items-center mt-2">
+            <span>📋 Track invoices</span>
+            <span class="text-info">This week</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3 h-100">
+        <h5 class="fw-bold">Project updates</h5>
+        <p class="mb-1">
+          <strong>Market research:</strong> completed for Project A
+        </p>
+        <p class="mb-1">
+          <strong>Market research:</strong> new analysis added for Project C
+        </p>
+        <p class="mb-1"><strong>Team member added:</strong> to Project C</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card p-3 h-100">
+        <h5 class="fw-bold">Project categories</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">
+            <i class="fas fa-building me-2"></i> Construction sites
+          </li>
+          <li class="mb-2"><i class="fas fa-users me-2"></i> Project team</li>
+          <li class="mb-2">
+            <i class="fas fa-briefcase me-2"></i> Project planning
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-check-double me-2"></i> Finished projects
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card p-3 h-100">
+        <h5 class="fw-bold">Project tracking</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2 d-flex justify-content-between align-items-center">
+            <span>🕒 Create project</span>
+            <span class="text-secondary">1h 25m 30s</span>
+            <button class="btn btn-sm btn-dark ms-2">View</button>
+            <button class="btn btn-sm btn-success ms-2">Edit</button>
+          </li>
+          <li class="mb-2 d-flex justify-content-between align-items-center">
+            <span>🕒 Blueprint design</span>
+            <span class="text-secondary">2h 30m 18s</span>
+            <button class="btn btn-sm btn-dark ms-2">View</button>
+            <button class="btn btn-sm btn-success ms-2">Edit</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3 d-flex align-items-center">
+      <div
+        class="card w-100 d-flex align-items-center justify-content-center p-3"
+      >
+        <button class="btn btn-success">Add widget</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Project Modal -->
+  <div class="modal" [ngClass]="{'d-block': showNewProjectModal}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New Project</h5>
+          <button type="button" class="btn-close" (click)="closeModals()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="projectName" class="form-label">Project Name *</label>
+              <input type="text" class="form-control" id="projectName" [(ngModel)]="newProject.name" name="projectName" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="startDate" class="form-label">Start Date *</label>
+                <input type="date" class="form-control" id="startDate" [(ngModel)]="newProject.startDate" name="startDate" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="endDate" class="form-label">End Date *</label>
+                <input type="date" class="form-control" id="endDate" [(ngModel)]="newProject.endDate" name="endDate" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="budget" class="form-label">Budget</label>
+              <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" id="budget" placeholder="0.00" [(ngModel)]="newProject.budget" name="budget">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="manager" class="form-label">Project Manager</label>
+              <input type="text" class="form-control" id="manager" [(ngModel)]="newProject.manager" name="manager">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModals()">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="submitNewProject()">Create Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show" *ngIf="showNewProjectModal"></div>
+</div>
