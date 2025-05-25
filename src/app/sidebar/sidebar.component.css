@@ -30,10 +30,10 @@
 }
 
 .nav-links li {
-    margin-bottom: 8px;
-    border-radius: 6px;
-    transition: all 0.2s ease-in-out;
-    overflow: hidden;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
 }
 
 .nav-links li a {
@@ -43,9 +43,6 @@
     align-items: center;
     gap: 10px;
     font-size: 16px;
-    padding: 12px 15px;
-    width: 100%;
-    transition: all 0.2s ease-in-out;
 }
 
 .nav-links li i {
@@ -56,22 +53,12 @@
     background: #e0e0e0;
 }
 
-.nav-links li:hover a {
-    transform: translateX(3px);
-}
-
 .nav-links li.active {
     background: #0bc407;
 }
 
 .nav-links li.active a {
     color: white;
-}
-
-a.active {
-    background: #0bc407;
-    color: white !important;
-    border-radius: 6px;
 }
 
 /* Section Title */

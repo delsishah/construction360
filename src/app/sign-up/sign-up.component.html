@@ -7,17 +7,6 @@
         ConstructManage
     </h3>
       <p>Create an Account.</p>
-      
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="alert alert-danger mt-2 mb-3">
-        {{ errorMessage }}
-      </div>
-      
-      <!-- Success Message -->
-      <div *ngIf="successMessage" class="alert alert-success mt-2 mb-3">
-        {{ successMessage }}
-      </div>
-      
       <form [formGroup]="form">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label d-flex align-items-start">Username</label>
@@ -88,7 +77,7 @@
           </div>
         </div>
           </div>
-          <button type="submit" (click)="submit()" class="btn btn-custom w-100">Sign Up</button>
+          <button type="submit" (click)="submit()" class="btn btn-custom w-100">Sign In</button>
       </form>
       <p class="mt-3">Already have an account? <a [routerLink]="'/login'" style="color: #0bc407;">Login</a></p>
     </div>

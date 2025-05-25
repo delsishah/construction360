@@ -13,8 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SignUpComponent implements OnInit {
   form!: FormGroup;
-  errorMessage!: string;
-  successMessage!: string;
 
   constructor(private fb: FormBuilder, private _authService: AuthService, private router: Router) {}
 
@@ -31,18 +29,8 @@ export class SignUpComponent implements OnInit {
       const { identifier, password } = this.form.value;
 
       this._authService.register(identifier, password).subscribe({
-        next: () => {
-          this.successMessage = 'Registration successful! Redirecting to login...';
-          this.errorMessage = '';
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 2000);
-        },
-        error: (err) => {
-          console.error('Registration failed:', err);
-          this.errorMessage = 'Registration failed. Email may already be in use.';
-          this.successMessage = '';
-        }
+        next: () => this.router.navigate(['/login']),
+        error: (err) => console.error('Registration failed:', err)
       });
     }
   }

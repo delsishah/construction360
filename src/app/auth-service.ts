@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  browserLocalPersistence,
+  browserSessionPersistence,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -20,15 +20,15 @@ export class AuthService {
   authUser: any;
 
   constructor(private firebaseAuth: Auth) {
-    this.setLocalStoragePersistence();
+    this.setSessionStoragePersistence();
     this.user$ = user(this.firebaseAuth);
     if (localStorage.getItem('user')) {
-      this.authUser = JSON.parse(localStorage.getItem('user') || '{}');
+      this.authUser = JSON.parse(sessionStorage.getItem('user') || '{}');
     }
   }
 
-  private setLocalStoragePersistence(): void {
-    setPersistence(this.firebaseAuth, browserLocalPersistence);
+  private setSessionStoragePersistence(): void {
+    setPersistence(this.firebaseAuth, browserSessionPersistence);
   }
 
   login(email: string, password: string): Observable<void> {
@@ -47,8 +47,8 @@ export class AuthService {
 
   logout(): Observable<void> {
     const promise = signOut(this.firebaseAuth).then(() => {
+      sessionStorage.clear();
       localStorage.removeItem('user');
-      this.authUser = null;
     });
     return from(promise);
   }

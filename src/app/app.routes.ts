@@ -11,8 +11,6 @@ import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './auth.guard';
 import { SurveysComponent } from './surveys/surveys.component';
 import { LoginGuard } from './login.guard';
-import { ProjectsReportsComponent } from './projects-reports/projects-reports.component';
-import { ProjectGoalsComponent } from './project-goals/project-goals.component';
 
 export const routes: Routes = [
     {
@@ -37,14 +35,6 @@ export const routes: Routes = [
             {
                 path: 'surveys',
                 component: SurveysComponent
-            },
-            {
-                path: 'projects-reports',
-                component: ProjectsReportsComponent
-            },
-            {
-                path: 'project-goals',
-                component: ProjectGoalsComponent
             },
             { path: 'marketing', component: MarketingComponent },
             { path: 'design-process', component: DesignProcessComponent },

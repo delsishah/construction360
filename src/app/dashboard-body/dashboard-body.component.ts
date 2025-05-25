@@ -1,68 +1,57 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-body',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './dashboard-body.component.html',
   styleUrl: './dashboard-body.component.css'
 })
 export class DashboardBodyComponent {
-  // Modal display flag
-  showNewProjectModal = false;
-  
-  // New project form model
-  newProject = {
-    name: '',
-    startDate: '',
-    endDate: '',
-    budget: '',
-    manager: ''
-  };
+  imagePreview: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
+  result: any = null;
+  loading = false;
+  error: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  // Open new project modal
-  openNewProjectModal() {
-    this.resetNewProjectForm();
-    this.showNewProjectModal = true;
-  }
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
 
-  // Close all modals
-  closeModals() {
-    this.showNewProjectModal = false;
-  }
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
 
-  // Reset new project form
-  resetNewProjectForm() {
-    this.newProject = {
-      name: '',
-      startDate: '',
-      endDate: '',
-      budget: '',
-      manager: ''
-    };
-  }
-
-  // Submit new project
-  submitNewProject() {
-    if (!this.newProject.name || !this.newProject.startDate || !this.newProject.endDate) {
-      alert('Please fill in all required fields');
-      return;
+      this.uploadImage(); // Auto-upload image after selection
     }
-
-    // In a real app, you'd save the project to a database
-    console.log('New project created:', this.newProject);
-    
-    // Close the modal
-    this.closeModals();
   }
 
-  // Navigate to projects page
-  goToProjects() {
-    this.router.navigate(['/projects-reports']);
+  uploadImage(): void {
+    if (!this.selectedFile) return;
+
+    const formData = new FormData();
+    formData.append('image', this.selectedFile);
+
+    this.loading = true;
+    this.result = null;
+    this.error = null;
+
+    this.http.post<any>('http://127.0.0.1:8000/analyze-image/', formData).subscribe({
+      next: (response) => {
+        this.result = response;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err.error?.error || 'Upload failed.';
+        this.loading = false;
+      }
+    });
   }
 }

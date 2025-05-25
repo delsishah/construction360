@@ -22,23 +22,29 @@ export class LoginComponent implements OnInit {
       identifier: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
+
   }
 
-  onLogin() {
+  submit() {
+    if (this.form.valid) {
+    }
+  }
+
+  async onLogin() {
     if (this.form.invalid) {
       return;
     }
 
     const { identifier, password } = this.form.value;
 
-    this._authService.login(identifier, password).subscribe({
-      next: () => {
+    try {
+      this._authService.login(identifier, password).subscribe((data) => {
         this.router.navigate(['/dashboard']);
-      },
-      error: (err) => {
-        console.error('Login failed:', err);
-        this.errorMessage = 'Invalid email or password. Please try again.';
       }
-    });
+      );
+      
+    } catch (error: any) {
+      this.errorMessage = error.message;
+    }
   }
 }

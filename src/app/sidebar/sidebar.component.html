@@ -4,46 +4,58 @@
         <span>Project</span>
     </div>
     <ul class="nav-links">
-        <li routerLinkActive="active">
-            <a routerLink="/dashboard">
+        <li class="active">
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/dashboard">
                 <i class="fas fa-home"></i> Home
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/projects-reports">
+        <li>
+            <a href="#">
                 <i class="fas fa-chart-line"></i> Projects & Reports
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/project-goals">
+        <li>
+            <a href="#">
                 <i class="fas fa-tasks"></i> Project Goals
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/surveys">
+        <li>
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/surveys">
                 <i class="fas fa-poll"></i> Surveys
             </a>
         </li>
 
         <!-- Project Teams -->
         <div class="section-title">Project Teams</div>
-        <li routerLinkActive="active">
-            <a routerLink="/marketing">
+        <li>
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/marketing">
                 <i class="fas fa-users"></i> Marketing
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/design-process">
-                <i class="fas fa-drafting-compass"></i> Design Process
+        <li>
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/design-process">
+                <i class="fas fa-drafting-compass"></i> Design Progress
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/site-security">
+        <li>
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/site-security">
                 <i class="fas fa-shield-alt"></i> Site Security
             </a>
         </li>
-        <li routerLinkActive="active">
-            <a routerLink="/operations">
+        <li>
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/operations">
                 <i class="fas fa-cogs"></i> Operations
             </a>
         </li>
@@ -60,7 +72,9 @@
         </div>
         <div class="settings">
             <!-- Replace the existing settings link with: -->
-            <a routerLinkActive="active" routerLink="/app-settings">
+            <a routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/app-settings">
                 <i class="fas fa-cog"></i> App Settings
             </a>
 
